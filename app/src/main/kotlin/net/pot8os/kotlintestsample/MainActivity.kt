@@ -1,5 +1,6 @@
 package net.pot8os.kotlintestsample
 
+import android.arch.persistence.room.Room
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -12,6 +13,7 @@ import java.text.DecimalFormat
  * @author So Nakamura, 2015/12/19
  */
 class MainActivity : MvpAppCompatActivity(), IMainView {
+    var db = Room.databaseBuilder(this, MyDatabase::class.java, "my_db").build()
 
     enum class Figure {
         ADD, SUB, MULTI, DIV, NONE;
@@ -42,5 +44,6 @@ class MainActivity : MvpAppCompatActivity(), IMainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.test()
+        db.myDao()
     }
 }
